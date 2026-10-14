@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChocoNest | Homemade Chocolates</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fffaf3;
+            color: #32180f;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        header {
+            width: 100%;
+            background: #29140e;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-family: Georgia, serif;
+            font-size: 29px;
+            font-weight: bold;
+            color: #f4d4aa;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        .logo small {
+            display: block;
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-align: center;
+            color: #e8cdb5;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            padding: 10px 5px;
+            white-space: nowrap;
+            
+        }
+
+        nav a:hover {
+            color: #e8bd8e;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 510px;
+            padding: 75px 7%;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(30, 13, 7, 0.96) 0%,
+                    rgba(30, 13, 7, 0.80) 38%,
+                    rgba(30, 13, 7, 0.15) 100%
+                ),
+                url("https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1800&q=85")
+                center / cover no-repeat;
+            color: white;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 570px;
+        }
+
+        .eyebrow {
+            color: #e8bd8e;
+            letter-spacing: 3px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 5vw, 65px);
+            line-height: 1.15;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: #e8bd8e;
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: #f5e9df;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #f1d2ab;
+            color: #32180f;
+            padding: 14px 27px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-3px);
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            padding: 32px 7%;
+            background: #f3e6d5;
+            text-align: center;
+        }
+
+        .feature h3 {
+            font-family: Georgia, serif;
+            font-size: 19px;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            font-size: 14px;
+            color: #6d564a;
+            line-height: 1.7;
+        }
+
+        /* Common Section Styles */
+        .section-label {
+            color: #9a5c37;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-title {
+            font-family: Georgia, serif;
+            font-size: clamp(30px, 4vw, 43px);
+            margin: 12px 0;
+        }
+
+        .section-desc {
+            color: #705d52;
+            line-height: 1.8;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 70px 7%;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+            margin-top: 35px;
+            text-align: left;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #eadbca;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px #4c28121a;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #78665a;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .price {
+            color: #824326;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .small-btn {
+            display: inline-block;
+            margin-top: 13px;
+            background: #32180f;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .small-btn:hover {
+            background: #895333;
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #f1e4d4;
+            align-items: center;
+        }
+
+        .about img {
+            width: 100%;
+            height: 100%;
+            min-height: 390px;
+            object-fit: cover;
+        }
+
+        .about-content {
+            padding: 55px 10%;
+        }
+
+        .about-content h2 {
+            font-family: Georgia, serif;
+            font-size: clamp(30px, 4vw, 42px);
+            margin: 18px 0;
+            line-height: 1.25;
+        }
+
+        .about-content p {
+            color: #685247;
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+
+        .signature {
+            font-family: Georgia, serif;
+            font-size: 21px;
+            font-style: italic;
+            color: #99582f;
+            margin-bottom: 22px;
+        }
+
+        /* Why Choose Us */
+        .why-us {
+            padding: 65px 7%;
+            background:
+                linear-gradient(
+                    rgba(37, 15, 7, 0.96),
+                    rgba(37, 15, 7, 0.96)
+                ),
+                url("https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=1200&q=80")
+                center / cover;
+            color: white;
+            text-align: center;
+        }
+
+        .why-us .section-title {
+            color: white;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .why-card {
+            padding: 15px;
+        }
+
+        .why-card .icon {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .why-card h3 {
+            color: #e8bd8e;
+            margin-bottom: 10px;
+        }
+
+        .why-card p {
+            color: #e4d1c1;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 65px 7%;
+            text-align: center;
+            background: #fff0dc;
+        }
+
+        .contact-box {
+            max-width: 700px;
+            margin: 25px auto 0;
+            padding: 35px 22px;
+            background: white;
+            border: 1px solid #f0dfcc;
+            border-radius: 18px;
+        }
+
+        .contact-box p {
+            color: #705d52;
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e100b;
+            color: #f7e9dc;
+            text-align: center;
+            padding: 32px 7%;
+        }
+
+        footer p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #e8bd8e;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: #c9b4a5;
+            font-size: 12px;
+            margin-top: 20px;
+        }
+
+        /* Tablet */
+        @media (max-width: 1000px) {
+            header {
+                justify-content: center;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hero {
+                min-height: 470px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            header {
+                padding: 18px 5%;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav {
+                gap: 12px 18px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 460px;
+                padding: 55px 6%;
+                background-position: 62% center;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .products {
+                padding: 50px 5%;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card img {
+                height: 230px;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+            }
+
+            .about img {
+                min-height: 260px;
+                max-height: 330px;
+            }
+
+            .about-content {
+                padding: 40px 7%;
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+
+            .contact {
+                padding: 45px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <div class="logo">
+            Choco<span>Nest</span> 🍫
+            <small>HOMEMADE CHOCOLATES</small>
+        </div>
+
+        <nav>
+            <a href="#home">Home </a>
+            <a href="#about"> About Us </a>
+            <a href="#products.html"> Our Chocolates </a>
+            <a href="#why"> Why Choose Us </a>
+            <a href="#contact"> Contact </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="eyebrow">Pure • Fresh • Homemade</div>
+
+            <h1>
+                More Than Just<br>
+                Chocolate...<br>
+                <span>It's Happiness!</span>
+            </h1>
+
+            <p>
+                Discover the magic of homemade chocolates,
+                handcrafted with love and made to sweeten
+                every special moment of your life.
+            </p>
+
+            <a href="#products" class="btn">
+                Explore Our Chocolates →
+            </a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="feature">
+            <h3>🌿 Quality Ingredients</h3>
+            <p>Carefully selected ingredients for delicious treats.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🤎 Handmade with Love</h3>
+            <p>Every chocolate is crafted with care and attention.</p>
+        </div>
+
+        <div class="feature">
+            <h3>🎁 Perfect for Gifting</h3>
+            <p>Sweet surprises for birthdays and special occasions.</p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-label">Made for Chocolate Lovers</div>
+
+        <h2 class="section-title">Our Chocolates ♡</h2>
+
+        <p class="section-desc">
+            From classic favourites to irresistible handmade treats,
+            find your perfect chocolate.
+        </p>
+
+        <div class="product-grid">
+
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85"
+                    alt="Dark chocolate">
+
+                <div class="product-info">
+                    <h3>Dark Chocolate</h3>
+                    <p>Rich, smooth and full of chocolate flavour.</p>
+                    <div class="price">₹199</div>
+                    <a href="#contact" class="small-btn">Enquire Now →</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1548907040-4d42faa7e7a5?auto=format&fit=crop&w=700&q=85"
+                    alt="Chocolate truffles">
+
+                <div class="product-info">
+                    <h3>Chocolate Truffles</h3>
+                    <p>Soft, creamy bites for chocolate lovers.</p>
+                    <div class="price">₹249</div>
+                    <a href="#contact" class="small-btn">Enquire Now →</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=700&q=85"
+                    alt="Assorted chocolate treats">
+
+                <div class="product-info">
+                    <h3>Chocolate Bites</h3>
+                    <p>A delightful treat to enjoy anytime.</p>
+                    <div class="price">₹149</div>
+                    <a href="#contact" class="small-btn">Enquire Now →</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img
+                    src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=700&q=85"
+                    alt="Chocolate gift box">
+
+                <div class="product-info">
+                    <h3>Gift Chocolate Box</h3>
+                    <p>A thoughtful gift for your favourite people.</p>
+                    <div class="price">₹399</div>
+                    <a href="#contact" class="small-btn">Enquire Now →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Us -->
+    <section class="about" id="about">
+        <img
+            src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=1000&q=85"
+            alt="Homemade chocolate collection">
+
+        <div class="about-content">
+            <div class="section-label">Our Story</div>
+
+            <h2>From Our Home to Your Heart</h2>
+
+            <p>
+                ChocoNest began with a simple dream: to share the
+                joy of homemade chocolates with everyone.
+                We combine creativity, passion and careful
+                preparation to make every chocolate special.
+            </p>
+
+            <p>
+                Whether you are celebrating a birthday,
+                surprising someone you love, or treating yourself,
+                we want every bite to feel memorable.
+            </p>
+
+            <div class="signature">Small Batches. Big Happiness. ♡</div>
+
+            <a href="#contact" class="small-btn">Contact Us →</a>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us" id="why">
+        <div class="section-label">The ChocoNest Difference</div>
+
+        <h2 class="section-title">Made to Melt Your Heart</h2>
+
+        <p class="section-desc">
+            It's not just chocolate. It's a little moment of joy.
+        </p>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="icon">🌿</div>
+                <h3>Quality First</h3>
+                <p>Carefully chosen ingredients for delicious treats.</p>
+            </div>
+
+            <div class="why-card">
+                <div class="icon">🤎</div>
+                <h3>Handcrafted</h3>
+                <p>Small-batch chocolates made with care.</p>
+            </div>
+
+            <div class="why-card">
+                <div class="icon">🎨</div>
+                <h3>Unique Flavours</h3>
+                <p>Creative treats for different tastes and occasions.</p>
+            </div>
+
+            <div class="why-card">
+                <div class="icon">🎁</div>
+                <h3>Custom Gifts</h3>
+                <p>Chocolate gifts for birthdays and celebrations.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-label">Let's Make Life Sweeter</div>
+
+        <h2 class="section-title">Your Next Favourite Chocolate Awaits</h2>
+
+        <div class="contact-box">
+            <p>
+                Looking for delicious chocolates or a special gift?
+                Contact us to enquire about available products and prices.
+            </p>
+
+            <a href="mailto:your-email@example.com" class="btn">
+                Contact Us →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo">ChocoNest 🍫</div>
+
+        <p>Homemade with love, shared with happiness.</p>
+
+        <p>
+            <a href="#home">Home</a>
+            <a href="#about">About Us</a>
+            <a href="#products">Products</a>
+            <a href="#contact">Contact</a>
+        </p>
+
+        <p class="copyright">
+            © 2026 ChocoNest. All rights reserved.
+        </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,922 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Our Chocolates | ChocoNest</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fffaf3;
+            color: #32180f;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER */
+        header {
+            background: #29140e;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            color: #f4d4aa;
+            font-family: Georgia, serif;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 50px;
+        }
+
+        nav a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            font-size: 10px 5px;
+            white-space: nowrap;
+            
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: #f4c68f;
+        }
+
+        /* SEARCH BAR */
+        .search-area {
+            background: #3b2117;
+            padding: 18px 6%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #e6c49f;
+        }
+
+        .search-box input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            border: none;
+            background: #f1d2ab;
+            color: #32180f;
+            padding: 0 22px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        /* CATEGORY MENU */
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px 5%;
+            background: #f5e8d8;
+        }
+
+        .categories button {
+            background: white;
+            border: 1px solid #d8b99a;
+            border-radius: 25px;
+            padding: 10px 20px;
+            color: #543020;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .categories button:hover,
+        .categories button.active {
+            background: #32180f;
+            color: white;
+            border-color: #32180f;
+        }
+
+        /* BANNER */
+        .banner {
+            margin: 25px 6%;
+            padding: 50px 6%;
+            min-height: 250px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(35, 15, 8, 0.95),
+                    rgba(35, 15, 8, 0.30)
+                ),
+                url("https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=1500&q=85")
+                center / cover no-repeat;
+            color: white;
+        }
+
+        .banner-content {
+            max-width: 520px;
+        }
+
+        .banner h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(30px, 4vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+
+        .banner h1 span {
+            color: #f4c68f;
+            font-style: italic;
+        }
+
+        .banner p {
+            line-height: 1.8;
+            margin-bottom: 22px;
+            color: #f5e8dc;
+        }
+
+        .banner a {
+            display: inline-block;
+            background: #f1d2ab;
+            color: #32180f;
+            padding: 12px 22px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* PRODUCT SECTION */
+        .products {
+            padding: 25px 6% 70px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .section-heading h2 {
+            font-family: Georgia, serif;
+            font-size: 34px;
+        }
+
+        .section-heading p {
+            color: #8b6d5b;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .product-card {
+            position: relative;
+            background: white;
+            border: 1px solid #eadbca;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(50, 24, 15, 0.12);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            display: block;
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.06);
+        }
+
+        .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            padding: 6px 10px;
+            background: #8c3f26;
+            color: white;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .wishlist {
+            position: absolute;
+            right: 12px;
+            top: 10px;
+            width: 34px;
+            height: 34px;
+            border: none;
+            border-radius: 50%;
+            background: white;
+            color: #6b3323;
+            font-size: 21px;
+            cursor: pointer;
+        }
+
+        .product-info {
+            padding: 17px;
+        }
+
+        .category-label {
+            color: #9a684a;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info h3 {
+            font-family: Georgia, serif;
+            font-size: 19px;
+            margin: 7px 0;
+        }
+
+        .description {
+            color: #7b6a5f;
+            font-size: 13px;
+            line-height: 1.6;
+            min-height: 42px;
+        }
+
+        .rating {
+            margin: 12px 0;
+            color: #b47a13;
+            font-size: 13px;
+        }
+
+        .rating span {
+            color: #79685c;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .price {
+            font-size: 21px;
+            font-weight: bold;
+            color: #542b1b;
+        }
+
+        .old-price {
+            font-size: 13px;
+            color: #998d84;
+            text-decoration: line-through;
+        }
+
+        .add-cart {
+            width: 100%;
+            padding: 12px;
+            background: #32180f;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-cart:hover {
+            background: #8b4b2b;
+        }
+
+        .add-cart:disabled {
+            background: #8b4b2b;
+            cursor: default;
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 40px 10px;
+            color: #795548;
+            font-size: 18px;
+        }
+
+        /* GIFT BANNER */
+        .gift-banner {
+            margin: 0 6% 65px;
+            padding: 35px;
+            background: #f2e1cf;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .gift-banner h2 {
+            font-family: Georgia, serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .gift-banner p {
+            color: #795548;
+            margin-bottom: 20px;
+        }
+
+        .gift-banner a {
+            display: inline-block;
+            background: #32180f;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #1e100b;
+            color: #f7e9dc;
+            text-align: center;
+            padding: 32px 6%;
+        }
+
+        footer .logo {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            font-size: 14px;
+            margin: 8px 0;
+        }
+
+        footer a {
+            color: #e8bd8e;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* TABLET */
+        @media (max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            header {
+                justify-content: center;
+            }
+        }
+
+        /* MOBILE */
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                padding: 18px 5%;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .banner {
+                margin: 18px 4%;
+                padding: 35px 6%;
+            }
+
+            .categories {
+                gap: 9px;
+            }
+
+            .categories button {
+                padding: 9px 14px;
+            }
+
+            .products {
+                padding: 20px 4% 45px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .product-image img {
+                height: 155px;
+            }
+
+            .product-info {
+                padding: 12px;
+            }
+
+            .product-info h3 {
+                font-size: 16px;
+            }
+
+            .description {
+                font-size: 12px;
+            }
+
+            .price {
+                font-size: 17px;
+            }
+
+            .section-heading h2 {
+                font-size: 29px;
+            }
+
+            .gift-banner {
+                margin: 0 4% 40px;
+                padding: 25px 15px;
+            }
+
+            .gift-banner h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Choco<span>Nest</span> 🍫</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="products.html" class="active">Our Chocolates</a>
+            <a href="index.html#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- SEARCH -->
+    <div class="search-area">
+        <div class="search-box">
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search chocolates, truffles, gift boxes..."
+                aria-label="Search products">
+
+            <button type="button" onclick="searchProducts()">
+                🔍 Search
+            </button>
+        </div>
+    </div>
+
+    <!-- CATEGORIES -->
+    <div class="categories">
+        <button class="active" data-category="all">All Products</button>
+        <button data-category="dark">Dark Chocolate</button>
+        <button data-category="truffles">Truffles</button>
+        <button data-category="bites">Chocolate Bites</button>
+        <button data-category="gifts">Gift Boxes</button>
+    </div>
+
+    <!-- BANNER -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Happiness Comes<br>in <span>Chocolate!</span></h1>
+
+            <p>
+                Handmade with love. Wrapped with care.
+                Discover sweet little treats made to brighten your day.
+            </p>
+
+            <a href="#all-products">Shop Our Collection →</a>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="products" id="all-products">
+
+        <div class="section-heading">
+            <div>
+                <h2>Our Chocolate Collection 🍫</h2>
+                <p>Discover your next favourite treat.</p>
+            </div>
+
+            <p id="productCount">8 products</p>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+
+            <!-- PRODUCT 1 -->
+            <div class="product-card" data-category="dark"
+                 data-name="dark chocolate classic cocoa">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80"
+                        alt="Dark chocolate pieces">
+
+                    <span class="badge">BESTSELLER</span>
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Dark Chocolate</div>
+                    <h3>Classic Dark Chocolate</h3>
+                    <p class="description">
+                        Deep cocoa flavour for true chocolate lovers.
+                    </p>
+                    <div class="rating">★★★★★ <span>(4.8)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹199</span>
+                        <span class="old-price">₹249</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 2 -->
+            <div class="product-card" data-category="truffles"
+                 data-name="chocolate truffles creamy cocoa">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1548907040-4d42faa7e7a5?auto=format&fit=crop&w=600&q=80"
+                        alt="Chocolate truffles">
+
+                    <span class="badge">POPULAR</span>
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Truffles</div>
+                    <h3>Chocolate Truffles</h3>
+                    <p class="description">
+                        Rich, creamy bites with a velvety finish.
+                    </p>
+                    <div class="rating">★★★★★ <span>(4.9)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹249</span>
+                        <span class="old-price">₹299</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 3 -->
+            <div class="product-card" data-category="bites"
+                 data-name="chocolate bites assorted pralines">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1481391319762-47dff72954d9?auto=format&fit=crop&w=600&q=80"
+                        alt="Assorted chocolate bites">
+
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Chocolate Bites</div>
+                    <h3>Assorted Chocolate Bites</h3>
+                    <p class="description">
+                        Little chocolate treats for every craving.
+                    </p>
+                    <div class="rating">★★★★☆ <span>(4.6)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹149</span>
+                        <span class="old-price">₹179</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 4 -->
+            <div class="product-card" data-category="gifts"
+                 data-name="luxury chocolate gift box present">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1549007994-cb92caebd54b?auto=format&fit=crop&w=600&q=80"
+                        alt="Chocolate gift box">
+
+                    <span class="badge">GIFT PICK</span>
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Gift Boxes</div>
+                    <h3>Luxury Chocolate Box</h3>
+                    <p class="description">
+                        A sweet surprise for someone special.
+                    </p>
+                    <div class="rating">★★★★★ <span>(4.9)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹399</span>
+                        <span class="old-price">₹499</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 5 -->
+            <div class="product-card" data-category="dark"
+                 data-name="dark cocoa chocolate premium">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&w=600&q=80"
+                        alt="Premium chocolate assortment">
+
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Dark Chocolate</div>
+                    <h3>Premium Cocoa Bites</h3>
+                    <p class="description">
+                        An indulgent cocoa-rich chocolate treat.
+                    </p>
+                    <div class="rating">★★★★☆ <span>(4.7)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹229</span>
+                        <span class="old-price">₹279</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 6 -->
+            <div class="product-card" data-category="truffles"
+                 data-name="handmade chocolate truffle collection">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1575377427642-087cf684f29d?auto=format&fit=crop&w=600&q=80"
+                        alt="Handmade chocolate treats">
+
+                    <span class="badge">HANDMADE</span>
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Truffles</div>
+                    <h3>Truffle Delight Box</h3>
+                    <p class="description">
+                        A delicious collection of chocolate bites.
+                    </p>
+                    <div class="rating">★★★★★ <span>(4.8)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹299</span>
+                        <span class="old-price">₹349</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 7 -->
+            <div class="product-card" data-category="bites"
+                 data-name="sweet chocolate bites snack">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1541783245831-57d6fb0926d3?auto=format&fit=crop&w=600&q=80"
+                        alt="Sweet chocolate snack">
+
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Chocolate Bites</div>
+                    <h3>Sweet Treat Bites</h3>
+                    <p class="description">
+                        A little box of happiness for your snack time.
+                    </p>
+                    <div class="rating">★★★★☆ <span>(4.5)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹179</span>
+                        <span class="old-price">₹219</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- PRODUCT 8 -->
+            <div class="product-card" data-category="gifts"
+                 data-name="premium chocolate gift hamper">
+
+                <div class="product-image">
+                    <img
+                        src="https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=600&q=80"
+                        alt="Gift hamper">
+
+                    <span class="badge">SPECIAL GIFT</span>
+                    <button class="wishlist" aria-label="Add to wishlist"
+                            onclick="toggleWishlist(this)">♡</button>
+                </div>
+
+                <div class="product-info">
+                    <div class="category-label">Gift Boxes</div>
+                    <h3>Chocolate Gift Hamper</h3>
+                    <p class="description">
+                        A thoughtful chocolate gift for celebrations.
+                    </p>
+                    <div class="rating">★★★★★ <span>(4.8)</span></div>
+                    <div class="price-row">
+                        <span class="price">₹499</span>
+                        <span class="old-price">₹599</span>
+                    </div>
+                    <button class="add-cart" onclick="addToCart(this)">
+                        🛒 Add to Cart
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            🍫 No chocolates found. Try another search!
+        </div>
+
+    </section>
+
+    <!-- GIFT BANNER -->
+    <section class="gift-banner">
+        <h2>Make Their Day Sweeter 🎁</h2>
+
+        <p>
+            Surprise your favourite people with a box full of chocolate happiness.
+        </p>
+
+        <a href="index.html#contact">Enquire About Gift Orders →</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="logo">Choco<span>Nest</span> 🍫</div>
+
+        <p>Homemade with love, shared with happiness.</p>
+
+        <p>
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About Us</a>
+            <a href="products.html">Our Chocolates</a>
+            <a href="index.html#contact">Contact</a>
+        </p>
+
+        <p>© 2026 ChocoNest. All rights reserved.</p>
+    </footer>
+
+    <!-- SIMPLE INTERACTIONS -->
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const cards = document.querySelectorAll(".product-card");
+        const categoryButtons = document.querySelectorAll(".categories button");
+
+        let selectedCategory = "all";
+        let cartCount = 0;
+
+        function filterProducts() {
+            const searchText = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            cards.forEach(function(card) {
+                const name = card.dataset.name.toLowerCase();
+                const category = card.dataset.category;
+
+                const matchesSearch = name.includes(searchText);
+                const matchesCategory =
+                    selectedCategory === "all" ||
+                    category === selectedCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = "";
+                    visibleCount++;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            document.getElementById("productCount").textContent =
+                visibleCount + (visibleCount === 1 ? " product" : " products");
+
+            document.getElementById("noResults").style.display =
+                visibleCount === 0 ? "block" : "none";
+        }
+
+        function searchProducts() {
+            filterProducts();
+        }
+
+        searchInput.addEventListener("input", filterProducts);
+
+        categoryButtons.forEach(function(button) {
+            button.addEventListener("click", function() {
+                categoryButtons.forEach(function(item) {
+                    item.classList.remove("active");
+                });
+
+                button.classList.add("active");
+                selectedCategory = button.dataset.category;
+                filterProducts();
+            });
+        });
+
+        function addToCart(button) {
+            cartCount++;
+
+            button.textContent = "✓ Added (" + cartCount + ")";
+            button.disabled = true;
+
+            setTimeout(function() {
+                button.textContent = "🛒 Add to Cart";
+                button.disabled = false;
+            }, 1200);
+
+            alert("Product added to your demo cart! Total items: " + cartCount);
+        }
+
+        function toggleWishlist(button) {
+            if (button.textContent.trim() === "♡") {
+                button.textContent = "♥";
+                button.style.color = "#c0392b";
+            } else {
+                button.textContent = "♡";
+                button.style.color = "#6b3323";
+            }
+        }
+    </script>
+
+</body>
+</html>
